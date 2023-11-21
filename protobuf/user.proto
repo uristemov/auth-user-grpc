@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package="/protobuf";
+
+message UserResponse {
+  string id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string password = 4;
+  string email = 5;
+}
+
+message UserRequest {
+  string email = 1;
+}
+
+service User {
+  rpc GetUserByEmail(UserRequest) returns (UserResponse) {}
+}
