@@ -15,4 +15,5 @@ type Client interface {
 	Connect() error
 	Close() error
 	GetUserByEmail(ctx context.Context, email string) (*models.User, error)
+	CreateUser(ctx context.Context, req *models.RegisterUser) (string, error)
 }

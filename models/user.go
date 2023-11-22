@@ -7,3 +7,10 @@ type User struct {
 	Password  string `json:"password"`
 	Email     string `json:"email"`
 }
+
+type RegisterUser struct {
+	FirstName string `json:"firstname"`
+	LastName  string `json:"lastname"`
+	Password  string `json:"password"`
+	Email     string `json:"email"`
+}

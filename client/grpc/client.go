@@ -53,7 +53,7 @@ func (c *Client) Close() error {
 }
 
 func (c *Client) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
-	resp, err := c.client.GetUserByEmail(ctx, &protobuf.UserRequest{Email: email})
+	resp, err := c.client.GetUserByEmail(ctx, &protobuf.GetUserByEmailRequest{Email: email})
 	if err != nil {
 		return nil, err
 	}
@@ -65,4 +65,21 @@ func (c *Client) GetUserByEmail(ctx context.Context, email string) (*models.User
 		Email:     resp.Email,
 		Password:  resp.Password,
 	}, nil
+}
+
+func (c *Client) CreateUser(ctx context.Context, req *models.RegisterUser) (string, error) {
+
+	grpcRequest := &protobuf.CreateUserRequest{
+		Firstname: req.FirstName,
+		Lastname:  req.LastName,
+		Password:  req.Password,
+		Email:     req.Email,
+	}
+
+	resp, err := c.client.CreateUser(ctx, grpcRequest)
+	if err != nil {
+		return "", err
+	}
+
+	return resp.Id, nil
 }

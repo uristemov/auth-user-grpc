@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package="/protobuf";
 
-message UserResponse {
+message GetUserByEmailResponse {
   string id = 1;
   string firstname = 2;
   string lastname = 3;
@@ -10,10 +10,28 @@ message UserResponse {
   string email = 5;
 }
 
-message UserRequest {
+message GetUserByEmailRequest {
   string email = 1;
 }
 
+message CreateUserRequest {
+  string firstname = 1;
+  string lastname = 2;
+  string password = 3;
+  string email = 4;
+}
+
+message CreateUserResponse {
+  string id = 1;
+  Error error = 2;
+}
+
+message Error {
+  int32 code = 1;
+  string message = 2;
+}
+
 service User {
-  rpc GetUserByEmail(UserRequest) returns (UserResponse) {}
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {}
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 }
